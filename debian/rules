@@ -1,0 +1,18 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+override_dh_auto_configure:
+	./mkcfg
+
+override_dh_auto_build:
+	cd linux-rpi-4.19.y; KERNEL=kernel7; yes "" | make -j12 ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- zImage modules dtbs
+
+override_dh_install:
+	mkdir -p debian/linux-image-rpi/boot/overlays
+	cp linux-rpi-4.19.y/arch/arm/boot/dts/*.dtb debian/linux-image-rpi/boot/
+	cp linux-rpi-4.19.y/arch/arm/boot/dts/overlays/*.dtb* debian/linux-image-rpi/boot/overlays/
+	cp linux-rpi-4.19.y/arch/arm/boot/zImage debian/linux-image-rpi/boot/kernel7.img
+	cd linux-rpi-4.19.y; make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=../debian/linux-modules-rpi modules_install

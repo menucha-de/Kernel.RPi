@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cd linux-rpi-4.19.y
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bcm2709_defconfig
+sed -r 's/^((CONFIG\_AUDIT=.*$)|(^# CONFIG\_AUDIT\s.*$))/CONFIG\_AUDIT=y/m' .config -i
+sed -r 's/^((CONFIG\_CRYPTO\_SHA1=.*$)|(^# CONFIG\_CRYPTO\_SHA1\s.*$))/CONFIG\_CRYPTO\_SHA1=y/m' .config -i
+sed -r 's/^((CONFIG\_SECURITY=.*$)|(^# CONFIG\_SECURITY\s.*$))/CONFIG\_SECURITY=y/m' .config -i 
+sed -r 's/^((CONFIG\_SECURITYFS=.*$)|(^# CONFIG\_SECURITYFS\s.*$))/CONFIG\_SECURITYFS=y/m' .config -i
+sed '/CONFIG_SECURITYFS=y/a CONFIG_SECURITY_NETWORK=y\nCONFIG_SECURITY_PATH=y\nCONFIG_SECURITY_APPARMOR=y\nCONFIG_SECURITY_APPARMOR_BOOTPARAM_VALUE=1\nCONFIG_SECURITY_APPARMOR_HASH=y\nCONFIG_INTEGRITY=y\nCONFIG_INTEGRITY_AUDIT=y' .config -i
+

@@ -1,0 +1,17 @@
+Source: rpi
+Maintainer: HARTING IT_SD <opensource@HARTING.com>
+Build-Depends: debhelper, crossbuild-essential-armhf:native, bison:amd64, flex:amd64, bc:amd64, libssl-dev:amd64
+
+Package: linux-image-rpi
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: The Linux kernel 4.19 image and dts for use on ARMv7 raspberrypi
+Section: kernel
+Priority: optional
+
+Package: linux-modules-rpi
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: The Linux kernel 4.19 modules for use on ARMv7 raspberrypi
+Section: kernel
+Priority: optional

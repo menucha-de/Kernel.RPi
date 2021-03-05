@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+set -x
+
+env
+
+. /usr/share/mkapp/functions
+
+wget -qq https://github.com/raspberrypi/linux/archive/rpi-4.19.y.tar.gz
+tar xf rpi-4.19.y.tar.gz
+
+build -F
+
+if [ "$PUBLISH" ]; then
+  publish_debs
+fi
