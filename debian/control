@@ -1,5 +1,5 @@
 Source: rpi
-Maintainer: HARTING IT_SD <opensource@HARTING.com>
+Maintainer: Menucha Team <info@menucha.de>
 Build-Depends: debhelper, crossbuild-essential-armhf:native, bison:amd64, flex:amd64, bc:amd64, libssl-dev:amd64
 
 Package: linux-image-rpi
